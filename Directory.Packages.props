@@ -1,0 +1,19 @@
+<Project>
+  <!-- Versiones centralizadas: se actualizan en un solo lugar para toda la solución. -->
+  <ItemGroup>
+    <!-- API -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="10.0.0" />
+    <!-- Fuerza una versión sin la vulnerabilidad NU1903 (GHSA-v5pm-xwqc-g5wc) en la dependencia transitiva de Microsoft.AspNetCore.OpenApi -->
+    <GlobalPackageReference Include="Microsoft.OpenApi" Version="2.7.5" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+
+    <!-- Tests -->
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.6.0" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+  </ItemGroup>
+</Project>

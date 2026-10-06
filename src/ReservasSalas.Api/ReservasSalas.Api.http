@@ -1,0 +1,38 @@
+@base = http://localhost:8080
+
+### Crear una sala
+POST {{base}}/api/salas
+Content-Type: application/json
+
+{
+  "nombre": "Sala Andes",
+  "capacidad": 8
+}
+
+### Listar salas
+GET {{base}}/api/salas
+
+### Crear una reserva (reemplaza salaId por el id devuelto arriba)
+POST {{base}}/api/reservas
+Content-Type: application/json
+
+{
+  "salaId": "00000000-0000-0000-0000-000000000000",
+  "inicio": "2026-12-01T09:00:00-03:00",
+  "fin": "2026-12-01T10:00:00-03:00",
+  "organizadorEmail": "ana@empresa.com",
+  "asistentes": 4
+}
+
+### Disponibilidad de la sala en un día (hora de Santiago)
+GET {{base}}/api/salas/00000000-0000-0000-0000-000000000000/reservas?fecha=2026-12-01&zonaHoraria=America/Santiago
+
+### Cancelar (solo el organizador)
+DELETE {{base}}/api/reservas/00000000-0000-0000-0000-000000000000
+X-User-Email: ana@empresa.com
+
+### Health check
+GET {{base}}/health
+
+### Documento OpenAPI
+GET {{base}}/openapi/v1.json

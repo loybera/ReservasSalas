@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: reservas
+      POSTGRES_USER: reservas
+      POSTGRES_PASSWORD: reservas
+    ports:
+      - "5432:5432"
+    volumes:
+      - api-exercise-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reservas -d reservas"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    environment:
+      # Entre comillas por los ";" de la cadena de conexión
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=reservas;Username=reservas;Password=reservas"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  # Volumen creado previamente con: docker volume create api-exercise-db
+  api-exercise-db:
+    external: true
